@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Upload the rectangle </title>
+</head>
+<body>
+		<canvas id = 'lesson02' width="500" height="500" style="border: 1px solid black;"/>
+		<script>
+			let canvas = document.getElementById('lesson02');
+			let context = canvas.getContext('2d');
+			let velocity = 1;
+			coor_X = 15;
+			coor_Y = 15;
+
+			var img = new Image();
+			img.src = "./myImage.png";
+			img.onload = function() {
+				setInterval(draw, 16,67);
+			}
+
+			var data = context.getImageData(0, 0, canvas.width, canvas.height);
+
+			function draw() {
+				context.clearRect(0,0,canvas.width, canvas.height);
+				for (var j=0; j<100; j++) {
+					for (var i=0; i<150; i++) {
+
+						data.data[500*4*(coor_Y+j-100)+(coor_X+i)*4+1] = 0;
+						data.data[500*4*(coor_Y+j-100)+(coor_X+i)*4+3] = 0;
+
+						data.data[500*4*(coor_Y+j)+(coor_X+i)*4+1] = 255;
+						data.data[500*4*(coor_Y+j)+(coor_X+i)*4+3] = 255;
+
+					}
+				}
+				context.putImageData(data, 0, 0);
+				coor_Y += velocity;
+			}
+		</script>
+</body>
+</html>

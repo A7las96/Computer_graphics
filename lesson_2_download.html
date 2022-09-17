@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Download the rectangle </title>
+</head>
+<body>
+		<a href="" download="myImage.png" class="button" id="btn-download" onclick="download_img(this);">Download</a>
+
+		<canvas id = 'lesson02' width="500" height="500" style="border: 1px solid black;"/>
+
+
+		<script>
+			let canvas = document.getElementById('lesson02');
+			let context = canvas.getContext('2d');
+
+
+			// рисуем прямоугольник в функции draw()
+			function draw() {
+			var data = context.getImageData(0, 0, canvas.width, canvas.height);
+
+			for (var j=0; j<100; j++) {
+					for (var i=0; i<150; i++) {
+						data.data[500*4*(15+j)+(15+i)*4+1] = 255;
+						data.data[500*4*(15+j)+(15+i)*4+3] = 255;
+					}
+			}
+			context.putImageData(data, 0, 0);
+			}
+			
+
+			draw()
+
+
+			// создаем кнопку как ивент листнера, если по ней кликнут, то откроется окно со скачиванием, после чего прямоугольник удаляется
+			var button = document.getElementById('btn-download');
+			button.addEventListener('click', function (e) {
+    			var dataURL = canvas.toDataURL('image/png');
+    			button.href = dataURL;
+    			context.clearRect(0,0, canvas.width, canvas.height)
+			});
+		</script>
+</body>
+</html>
