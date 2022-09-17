@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Lesson01 right here. </title>
+</head>
+<body style="margin: 0;">
+	<canvas id="lesson01" style="display: block;"> Bicycle here 0_0 </canvas>
+
+	<script>
+		let canvas  = document.getElementById('lesson01');
+		let context = canvas.getContext("2d");
+
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		velocity = 1;
+
+		//Here is the code 
+		function draw() {
+			context.clearRect(0,0,canvas.width, canvas.height);
+
+
+			//left wheel
+			context.beginPath();
+			const wheel_1_outer = new Path2D();
+			context.lineWidth = 5;
+			wheel_1_outer.arc(canvas.width/4 + velocity, canvas.height/3, 50, 0, Math.PI*2)
+			context.stroke(wheel_1_outer);
+
+			context.beginPath();
+			const wheel_1_inner = new Path2D();
+			wheel_1_inner.arc(canvas.width/4 + velocity, canvas.height/3, 10, 0, Math.PI*2);
+			context.fill(wheel_1_inner);
+
+
+			//right wheel
+			context.beginPath();
+			const wheel_2_outer = new Path2D();
+			context.lineWidth = 5;
+			wheel_2_outer.arc(canvas.width/2 + velocity, canvas.height/3, 50, 0, Math.PI*2)
+			context.stroke(wheel_2_outer);
+
+			context.beginPath();
+			const wheel_2_inner = new Path2D();
+			wheel_2_inner.arc(canvas.width/2 + velocity, canvas.height/3, 10, 0, Math.PI*2);
+			context.fill(wheel_2_inner);
+
+
+			context.beginPath();
+			context.lineWidth = 5;
+			context.moveTo(canvas.width/4 + velocity, canvas.height/3);
+			context.lineTo(canvas.width/2 - 90 + velocity, canvas.height/3);
+			context.lineTo(canvas.width/4 + 50 + velocity, canvas.height/3 - 70);
+			context.lineTo(canvas.width/4 + velocity, canvas.height/3);
+
+			context.lineTo(canvas.width/4 + 50 + velocity, canvas.height/3 - 70);
+			context.lineTo(canvas.width/4 + 50 + (canvas.width/2 - 90) - (canvas.width/4) + velocity, canvas.height/3 - 70);
+			context.lineTo(canvas.width/2 - 90 + velocity, canvas.height/3);
+			context.stroke();
+			context.lineCap = 'round';
+
+
+			context.beginPath();
+			context.moveTo(canvas.width/2 + velocity, canvas.height/3);
+			context.lineTo(canvas.width/4 + 35 + (canvas.width/2 - 90) - (canvas.width/4) + velocity, canvas.height/3 - 100);
+			context.lineTo(canvas.width/4 + 75 + (canvas.width/2 - 90) - (canvas.width/4) + velocity, canvas.height/3 - 100);
+			context.stroke();
+
+			context.beginPath();
+			const handle = new Path2D();
+			handle.arc(
+					canvas.width/4 + 75 + (canvas.width/2 - 90) - (canvas.width/4) + velocity,
+					canvas.height/3 - 100 + 15,
+					15,
+					-Math.PI/2,
+					Math.PI/2);
+			context.stroke(handle);
+
+
+			context.beginPath();
+			context.moveTo(canvas.width/4 + 10 + velocity, canvas.height/5);
+			context.lineTo(canvas.width/4 + 60 + velocity, canvas.height/5);
+			context.lineTo(canvas.width/4 + 33 + velocity, canvas.height/5);
+			context.lineTo(canvas.width/4 + 50 + velocity, canvas.height/3 - 70);
+			context.stroke();
+
+			velocity+=5;
+		}
+
+		setInterval(draw,16,67);
+	</script>
+
+</body>
+</html>

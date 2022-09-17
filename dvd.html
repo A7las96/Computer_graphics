@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> DVD be like...</title>
+</head>
+<body style="margin: 0;">
+	<canvas id="lesson01_dvd" style="display: block;"> dvd here 0_0 </canvas>
+
+	<script>
+		let canvas  = document.getElementById('lesson01_dvd');
+		let context = canvas.getContext("2d");
+
+		let coor_X = 100;
+		let coor_Y = 100;
+		let radius = 30;
+		let color = 'red';
+		let coor_X_velocity = 3;
+		let coor_Y_velocity = 2;
+
+		let text_velocity_X = 1;
+		let text_velocity_Y = 1;
+
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+		colors = ['magenta', 'blue', 'cyan', 'orange', 'red', 'purple', 'green', 'yellow', 'deepskyblue', 'plum'];
+
+		function draw() {
+			context.beginPath();
+			const dvd = new Path2D();
+			dvd.arc(coor_X,coor_Y,radius,0,Math.PI * 2);
+			context.closePath(dvd);
+			context.fillStyle = color;
+			context.fill(dvd);
+
+			
+		}
+
+		function dvd() {
+			context.fillRect(0,0, canvas.width, canvas.height, 'black');
+  			draw();
+  			coor_X += coor_X_velocity;
+  			coor_Y += coor_Y_velocity;
+
+  			context.font = ' bold 20px serif';
+  			context.fillStyle = 'black';
+  			context.textBaseline = 'middle'
+  			context.textAlign = 'center';
+			context.fillText('DVD', coor_X - coor_X_velocity, coor_Y - coor_Y_velocity);
+
+  			if ((coor_X + radius > canvas.width) || 
+  				(coor_X - radius < 0)) {
+  					coor_X_velocity = -coor_X_velocity;
+  					i = Math.round(Math.random() * 10);
+  					color = colors[i];
+  				}
+
+  			if ((coor_Y + radius > canvas.height) || 
+  				(coor_Y - radius < 0)) {
+  					coor_Y_velocity = -coor_Y_velocity;
+  					i = Math.round(Math.random() * 10);
+  					color = colors[i];
+  				}	
+		}
+
+		setInterval(dvd, 16,67);
+	</script>
+</body>
+</html>
